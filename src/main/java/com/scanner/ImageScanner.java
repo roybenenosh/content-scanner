@@ -1,12 +1,14 @@
 package com.scanner;
 
+import com.scanner.core.Scanner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class ImageScanner {
-    public List<String> scanImage(byte[] file) {
+public class ImageScanner implements Scanner<byte[], List<String>> {
+    @Override
+    public List<String> scan(byte[] file) {
         byte[] image = shrinkImage(file);
         float[] embeddings = runImageScan(image);
         return matchEmbeddings(embeddings);

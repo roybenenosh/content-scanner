@@ -1,12 +1,14 @@
 package com.scanner;
 
+import com.scanner.core.Scanner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class TextScanner {
-    public List<String> scanText(byte[] file) {
+public class TextScanner implements Scanner<byte[], List<String>> {
+    @Override
+    public List<String> scan(byte[] file) {
         String text = shortenText(file);
         float[] embeddings = runTextScan(text);
         return matchEmbeddings(embeddings);
